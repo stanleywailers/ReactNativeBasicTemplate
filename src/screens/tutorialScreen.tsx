@@ -14,16 +14,26 @@ export const TutorialScreen = () => {
       animationType='slide'
       
       >
-        <View style={styles.centeredView}>
-        <TouchableOpacity style={styles.button}>
 
-          <Text style={styles.textStyle}> X</Text>
-        </TouchableOpacity>
+        <View style={styles.insideContainter}> 
+        <View >
+     
         <Image source={require('../assets/BienvenidaApp.png')}>
 
 
         </Image>
+        
         </View>
+
+<View style={styles.button}>
+<TouchableOpacity >
+
+      <Text style={styles.textStyle}> X</Text>
+        </TouchableOpacity>
+</View>
+</View>
+        
+
     
       </Modal>
       
@@ -37,13 +47,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
+  },insideContainter:{
+  
+  
+    flex:1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+    backgroundColor:'pink'
+   
   },
   modalView: {
+   
     margin: 10,
-    backgroundColor: "white",
+    backgroundColor: "green",
     borderRadius: 20,
     padding: 20,
     alignItems: "center",
+    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -54,9 +75,17 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   button: {
+
+    position:'absolute',
+
+     top: 95,
+
+        right: 55,
+        
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
+    backgroundColor:'red'
   },
   
   textStyle: {
