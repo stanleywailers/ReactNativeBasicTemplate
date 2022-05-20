@@ -1,16 +1,19 @@
-import React, { useState, useRef } from 'react'
-import { StackScreenProps } from '@react-navigation/stack';
-import { Button, Dimensions , Text, View, TouchableOpacity} from 'react-native';
+import React, { useRef, useState } from 'react'
+import { Button, Dimensions, Image, Modal, StyleSheet, Text, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { SvgProps } from 'react-native-svg';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { SvgProps } from 'react-native-svg';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ConfiaIcon1 from '../assets/tutoConfia1.svg';
 import ConfiaIcon2 from '../assets/tutoConfia2.svg';
 import ConfiaIcon3 from '../assets/tutoConfia3.svg';
+import CloseButton from '../assets/close-circle-outline.svg';
 
-const { width: screenWidth } = Dimensions.get('window');
+
+		const { width: screenWidth } = Dimensions.get('window');
 
 export interface TutorialCard {
     title: string,
@@ -32,114 +35,118 @@ const items: TutorialCard[] = [
     }
 ]
 
-interface Props extends StackScreenProps<any, any>{};
+  export const TutorialScreen = () => {
 
-export const TutorialScreen = () => {
+			const carouselRef = useRef<Carousel<TutorialCard>>(null);
 
-  const carouselRef = useRef<Carousel<TutorialCard>>(null);
+			const [ dotActiveIndex, setDotActiveIndex ] = useState(0);
 
-  const [ dotActiveIndex, setDotActiveIndex ] = useState(0);
+    const [modalVisible, setModalVisible] = useState(true)
 
-  const renderItem = (item: TutorialCard) => {
-      return (
-        <View 
-            style={{
-                flex: 3,
-                flexDirection: 'row',
-                alignItems: 'center',
-                //backgroundColor: '#F00'                
-            }}
-        >
-          <TouchableOpacity 
-             style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#DCE4F2',
-                marginLeft: 20,
-                marginBottom: 200,
-             }}
-             activeOpacity={0.7}
-             onPress={() => { carouselRef.current?.snapToPrev(); }}
-          >
-            <Icon name='arrow-back-sharp' size={20} color='#00559c'/>
-          </TouchableOpacity>
-          <View
-            style={{
-                flex: 1,
-                margin: 0,
-                padding: 0,                
-                backgroundColor: '#FFF',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}
-        >
-          {/* renderixando svg */}
-          <item.img 
-            width={100}
-            height={100}
-            
-          />
+				const renderItem = (item: TutorialCard) => {
+					return (
+							<View 
+											style={{
+															flex: 3,
+															flexDirection: 'row',
+															alignItems: 'center',
+															//backgroundColor: '#F00'                
+											}}
+							>
+									<TouchableOpacity 
+												style={{
+															width: 30,
+															height: 30,
+															borderRadius: 30,
+															alignItems: 'center',
+															justifyContent: 'center',
+															backgroundColor: '#DCE4F2',
+															marginLeft: 20,
+															marginBottom: 200,
+												}}
+												activeOpacity={0.7}
+												onPress={() => {
+											
+													carouselRef.current?.snapToPrev(); }}
+									>
+											<Icon name='arrow-back-sharp' size={20} color='#00559c'/>
+									</TouchableOpacity>
+									<View
+											style={{
+															flex: 1,
+															margin: 0,
+															padding: 0,                
+															backgroundColor: '#FFF',
+															alignItems: 'center',
+															justifyContent: 'center'
+											}}
+							>
+									{/* renderixando svg */}
+									<item.img 
+											width={100}
+											height={100}
+											
+									/>
 
-          <Text 
-              style={{
-                  fontSize: 23,
-                  color: '#00559c',
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  marginTop: 10,
-                  marginBottom: 100
-              }}
-          >
-            { item.title }
-          </Text>
-          
-            <Pagination 
-                dotsLength={ items.length }
-                activeDotIndex={ dotActiveIndex }
-                dotStyle={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 10,
-                    backgroundColor: '#1D64D5'
+									<Text 
+													style={{
+																	fontSize: 23,
+																	color: '#00559c',
+																	fontWeight: 'bold',
+																	textAlign: 'center',
+																	marginTop: 10,
+																	marginBottom: 100
+													}}
+									>
+											{ item.title }
+									</Text>
+									
+											<Pagination 
+															dotsLength={ items.length }
+															activeDotIndex={ dotActiveIndex }
+															dotStyle={{
+																			width: 10,
+																			height: 10,
+																			borderRadius: 10,
+																			backgroundColor: '#1D64D5'
 
-                }}
-                inactiveDotScale={1}
-               
-               
-            />
+															}}
+															inactiveDotScale={1}
+														
+														
+											/>
 
-        </View>
-        <TouchableOpacity
-             style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#DCE4F2',
-                marginRight: 20,
-                marginBottom: 200
-             }}
-             activeOpacity={0.7}
-             onPress={() => { carouselRef.current?.snapToNext(); }}
-          >
-            <Icon name='arrow-forward-sharp' size={20} color='#00559c'/>
-          </TouchableOpacity>
-        </View>
-        
-      )
-  }
+							</View>
+							<TouchableOpacity
+												style={{
+															width: 30,
+															height: 30,
+															borderRadius: 30,
+															alignItems: 'center',
+															justifyContent: 'center',
+															backgroundColor: '#DCE4F2',
+															marginRight: 20,
+															marginBottom: 200
+												}}
+												activeOpacity={0.7}
+												onPress={() => { carouselRef.current?.snapToNext(); }}
+									>
+											<Icon name='arrow-forward-sharp' size={20} color='#00559c'/>
+									</TouchableOpacity>
+							</View>
+							
+					)
+	}
 
     return (
-      <SafeAreaView
+
+<SafeAreaView
         style={{
             flex: 1,
-            alignItems: 'center',
+            alignItems: 'center'
         }}
       >
+							
           <Carousel
             ref={carouselRef}
             data={items}
@@ -173,77 +180,102 @@ export const TutorialScreen = () => {
             Comenzar
           </Text>
         </TouchableOpacity>
-    
-      </SafeAreaView>
-    )
+
+								{/* /*VIEW del modal*/ }
+
+{
+	modalVisible && 
+	<View style={styles.centeredView}>
+		<Modal style={styles.modalView}
+
+		visible={modalVisible}
+		animationType='slide'
+		
+		>
+
+				<View style={styles.insideContainter}> 
+				<View >
+
+				<Image source={require('../assets/BienvenidaApp.png')}>
+
+
+				</Image>
+				
+				</View>
+
+<View style={styles.button}>
+
+<CloseButton onPress={() => setModalVisible(false)} ></CloseButton>
+		
+				
+</View>
+</View>
+				
+
+
+		</Modal>
+		
+</View>
 }
 
-// import React, { useState } from 'react'
-// import { Button, Image, Modal, StyleSheet, Text, View } from 'react-native'
-// import { TouchableOpacity } from 'react-native-gesture-handler'
 
-// export const TutorialScreen = () => {
-
-//   const [modalVisible, setModalVisible] = useState(true)
-
-//   return (
-//     <View style={styles.centeredView}>
-//       <Modal style={styles.modalView}
-
-//       visible={modalVisible}
-//       animationType='slide'
+							
+      </SafeAreaView>
       
-//       >
-//         <View style={styles.centeredView}>
-//         <TouchableOpacity style={styles.button}>
-
-//           <Text style={styles.textStyle}> X</Text>
-//         </TouchableOpacity>
-//         <Image source={require('../assets/BienvenidaApp.png')}>
 
 
-//         </Image>
-//         </View>
+    )
+  }
+
+  const styles = StyleSheet.create({
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22,
+						backgroundColor:'transparent'
+    },insideContainter:{
     
-//       </Modal>
-      
-//     </View>
-//   )
-// }
+    
+      flex:1,
+      justifyContent: "center",
+      alignItems: "center",
+      marginTop: 22,
+      backgroundColor:'transparent'
+    
+    },
+    modalView: {
+    
+      margin: 10,
+      backgroundColor: "green",
+      borderRadius: 20,
+      padding: 20,
+      alignItems: "center",
+      justifyContent: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    button: {
 
-// const styles = StyleSheet.create({
-//   centeredView: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//     marginTop: 22,
-//   },
-//   modalView: {
-//     margin: 10,
-//     backgroundColor: "white",
-//     borderRadius: 20,
-//     padding: 20,
-//     alignItems: "center",
-//     shadowColor: "#000",
-//     shadowOffset: {
-//       width: 0,
-//       height: 2
-//     },
-//     shadowOpacity: 0.25,
-//     shadowRadius: 4,
-//     elevation: 5
-//   },
-//   button: {
-//     borderRadius: 20,
-//     padding: 10,
-//     elevation: 2
-//   },
-  
-//   textStyle: {
-//     color: "white",
-//     fontWeight: "bold",
-//     textAlign: "center"
-//   }
-// });
+      position:'absolute',
+      top: 85,
+       right: 40,
+       borderRadius: 20,
+      padding: 10,
+      elevation: 0,
+    },
+    
+    textStyle: {
+      color: "white",
+      fontWeight: "bold",
+      textAlign: "center"
+    }
+  });
 
 
