@@ -2,7 +2,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import { TutorialScreen } from '../screens/TutorialScreen';
-import { SplashScreen } from '../screens/SplashScreen';
+//import { SplashScreen } from '../screens/SplashScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ export const StackNavigator = () => {
           }
       }}
    >
-      <Stack.Screen name="tutorialScreen" component={TutorialScreen} />
+      <Stack.Screen name="TutorialScreen" component={TutorialScreen} />
    {/* <Stack.Navigator >
      <Stack.Screen  options={{headerShown: false}} name="SplashScreen" component={SplashScreen} />
       <Stack.Screen 
