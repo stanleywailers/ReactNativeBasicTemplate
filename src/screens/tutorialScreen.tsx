@@ -1,14 +1,13 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState} from 'react';
 import {
-  Button,
   Dimensions,
   Image,
   Modal,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SvgProps} from 'react-native-svg';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -19,6 +18,7 @@ import ConfiaIcon1 from '../assets/tutoConfia1.svg';
 import ConfiaIcon2 from '../assets/tutoConfia2.svg';
 import ConfiaIcon3 from '../assets/tutoConfia3.svg';
 import CloseButton from '../assets/close-circle-outline.svg';
+import {tutorialScreenStyles} from '../theme/tutorialScreenStyles';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -68,21 +68,11 @@ export const TutorialScreen = () => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          //   backgroundColor: '#F00',
         }}>
         <View style={{flexDirection: 'row'}}>
           {item.PrevNavButton ? (
             <TouchableOpacity
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#DCE4F2',
-                marginLeft: 20,
-                top: 50,
-              }}
+              style={tutorialScreenStyles.prevNavTutorialButton}
               activeOpacity={0.7}
               onPress={() => {
                 carouselRef.current?.snapToPrev();
@@ -92,14 +82,8 @@ export const TutorialScreen = () => {
           ) : (
             <View
               style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
+                ...tutorialScreenStyles.prevNavTutorialButton,
                 backgroundColor: '#FFF',
-                marginLeft: 20,
-                top: 50,
               }}></View>
           )}
 
@@ -141,16 +125,7 @@ export const TutorialScreen = () => {
           </View>
           {item.nextNavButton ? (
             <TouchableOpacity
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#DCE4F2',
-                marginRight: 20,
-                top: 50,
-              }}
+              style={tutorialScreenStyles.nextNavTutorialButton}
               activeOpacity={0.7}
               onPress={() => {
                 carouselRef.current?.snapToNext();
@@ -160,34 +135,15 @@ export const TutorialScreen = () => {
           ) : (
             <View
               style={{
-                width: 30,
-                height: 30,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
+                ...tutorialScreenStyles.nextNavTutorialButton,
                 backgroundColor: '#FFF',
-                marginRight: 20,
-                top: 50,
               }}></View>
           )}
         </View>
         {item.beginButton && (
           <View style={{flexDirection: 'column'}}>
-            <TouchableOpacity
-              style={{
-                width: 300,
-                height: 50,
-                backgroundColor: '#00559c',
-                borderRadius: 23,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: '#FFF',
-                }}>
+            <TouchableOpacity style={tutorialScreenStyles.standardButton}>
+              <Text style={tutorialScreenStyles.textStandardButton}>
                 Comenzar
               </Text>
             </TouchableOpacity>
