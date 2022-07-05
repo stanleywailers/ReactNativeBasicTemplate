@@ -12,21 +12,35 @@ export const HomeScreen = () => {
   const appVersion = DeviceInfo.getVersion();
   return (
     // <ScrollView style={{backgroundColor: 'transparent', flex: 1}}>    </ScrollView>
-    <View style={{ backgroundColor: '#E5E5E5',flex:1}}>
-      <View
-        style={{ flex: 1, justifyContent:'center'}}>
-        <HomeMenuComponent svgIcon={Ic_Appointment} footerColor="#E68038" />
-        <HomeMenuComponent svgIcon={Ic_Promotions} footerColor="#3F80EC" />
-        <HomeMenuComponent svgIcon={Ic_My_Account} footerColor="#00559C" />
+    <View style={{backgroundColor: '#E5E5E5', flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <HomeMenuComponent
+          svgIcon={Ic_Appointment}
+          footerColor="#E68038"
+          navigateToScreen="TutorialScreen"
+        />
+        <HomeMenuComponent
+          svgIcon={Ic_Promotions}
+          footerColor="#3F80EC"
+          navigateToScreen="TutorialScreen"
+        />
+        <HomeMenuComponent
+          svgIcon={Ic_My_Account}
+          footerColor="#00559C"
+          navigateToScreen="TutorialScreen"
+        />
       </View>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginHorizontal: 18,
-          marginBottom:20
+          marginBottom: 20,
         }}>
-        <Text onPress={async () => await Linking.openURL(Constants.TermsAndConditionsUri) }
+        <Text
+          onPress={async () =>
+            await Linking.openURL(Constants.TermsAndConditionsUri)
+          }
           style={{
             color: '#2097F6',
             fontSize: 12,
