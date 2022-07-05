@@ -1,8 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import {TutorialScreen} from '../screens/TutorialScreen';
+
 import {SplashScreen} from '../screens/SplashScreen';
+import { HomeScreen } from '../screens/HomeScreen';
+import { TutorialScreen } from '../screens/tutorialScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +23,7 @@ export const StackNavigator = () => {
         component={SplashScreen}
       />
       <Stack.Screen name="TutorialScreen" component={TutorialScreen} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
     </Stack.Navigator>
   );
 };

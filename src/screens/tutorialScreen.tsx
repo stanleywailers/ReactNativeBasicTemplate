@@ -20,8 +20,9 @@ import ConfiaIcon2 from '../assets/tutoConfia2.svg';
 import ConfiaIcon3 from '../assets/tutoConfia3.svg';
 import CloseButton from '../assets/close-circle-outline.svg';
 import {tutorialScreenStyles} from '../theme/tutorialScreenStyles';
+import { useNavigation } from '@react-navigation/native';
 
-const {width: screenWidth} = Dimensions.get('window');
+const {width: screenWidth} = Dimensions.get('screen');
 
 export interface TutorialCard {
   PrevNavButton: boolean;
@@ -66,6 +67,8 @@ const carouselRef = useRef<Carousel<TutorialCard>>(null);
    
     setModalVisible(false)
   };
+
+ const navigation = useNavigation();
 
   const renderItem = (item: TutorialCard) => {
     return (
@@ -148,7 +151,9 @@ const carouselRef = useRef<Carousel<TutorialCard>>(null);
         </View>
         {item.beginButton && (
           <View style={{flexDirection: 'column'}}>
-            <TouchableOpacity style={tutorialScreenStyles.standardButton}>
+            <TouchableOpacity style={tutorialScreenStyles.standardButton}
+            onPress={() => navigation.navigate('HomeScreen' as any)}
+            >
               <Text style={tutorialScreenStyles.textStandardButton}>
                 Comenzar
               </Text>
@@ -172,7 +177,7 @@ const carouselRef = useRef<Carousel<TutorialCard>>(null);
           renderItem={({item}) => renderItem(item)}
           sliderWidth={screenWidth}
           itemWidth={screenWidth}
-          layout="tinder"
+          layout="default"
           onSnapToItem={index => {
             setDotActiveIndex(index);
           }}
